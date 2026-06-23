@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "abycourse",
+  "compatibility_date": "2026-06-23",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "abycourse"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "abycourse",
+      "database_id": "fbb48375-2054-43f1-89a6-ae5c5438b4c2"
+    }
+  ],
+  "vars": {
+    "DB_DRIVER": "cloudflare-d1",
+    "ADMIN_NAME": "Aby Course Teacher",
+    "CLOUDFLARE_D1_BINDING": "DB",
+    "CLOUDFLARE_D1_DATABASE_NAME": "abycourse",
+    "GEMINI_MODEL": "gemini-3.1-flash-lite",
+    "NEXT_PUBLIC_APP_URL": "https://replace-with-your-domain.example"
+  },
+  "secrets": {
+    "required": [
+      "ADMIN_EMAIL",
+      "ADMIN_PASSWORD",
+      "SESSION_SECRET",
+      "GEMINI_API_KEY"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+
+# Root-local secrets / temp
+.env
+.env.local
+.env.*.local
+
+# App build/runtime output
+app/node_modules/
+app/.next/
+app/.open-next/
+app/.wrangler/
+app/cloudflare-env.d.ts
+app/next-env.d.ts
+app/.dev.vars
+app/.dev.vars.*
+!app/.dev.vars.example
+app/.env
+app/.env.local
+app/.env.*.local
+!app/.env.example
+
+# Local databases
+app/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

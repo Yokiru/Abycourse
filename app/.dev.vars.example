@@ -1,0 +1,9 @@
+NEXTJS_ENV=development
+DB_DRIVER=cloudflare-d1
+ADMIN_NAME=Aby Course Teacher
+ADMIN_EMAIL=teacher@abycourse.local
+ADMIN_PASSWORD=replace-with-your-admin-password
+SESSION_SECRET=replace-with-a-long-random-secret
+GEMINI_API_KEY=replace-with-your-gemini-api-key
+GEMINI_MODEL=gemini-3.1-flash-lite
+NEXT_PUBLIC_APP_URL=http://127.0.0.1:8787
