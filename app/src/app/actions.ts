@@ -31,6 +31,14 @@ function withMessage(path: string, key: "error" | "success", message: string) {
   return `${path}${separator}${key}=${encodeURIComponent(message)}`;
 }
 
+function parseRedirectPath(value: FormDataEntryValue | null, fallback: string) {
+  if (typeof value !== "string") {
+    return fallback;
+  }
+
+  return value.startsWith("/") ? value : fallback;
+}
+
 function parseDifficultyLevel(value: string): DifficultyLevel | null {
   return difficultyLevels.includes(value as DifficultyLevel)
     ? (value as DifficultyLevel)
@@ -211,15 +219,23 @@ async function runAiDraftGeneration(formData: FormData): Promise<NavigationActio
 export async function loginAction(formData: FormData) {
   const email = clampText(formData.get("email")).toLowerCase();
   const password = clampText(formData.get("password"));
+  const successRedirect = parseRedirectPath(
+    formData.get("successRedirect"),
+    "/admin/exams",
+  );
+  const failureRedirect = parseRedirectPath(
+    formData.get("failureRedirect"),
+    "/admin/login",
+  );
 
   const admin = await getAdminByEmail(email);
 
   if (!admin || !verifyAdminPassword(admin.passwordHash, password)) {
-    redirect(withMessage("/admin/login", "error", "Email atau password belum cocok."));
+    redirect(withMessage(failureRedirect, "error", "Email atau password belum cocok."));
   }
 
   await createAdminSession(admin.publicId);
-  redirect("/admin/exams");
+  redirect(successRedirect);
 }
 
 export async function logoutAction() {
