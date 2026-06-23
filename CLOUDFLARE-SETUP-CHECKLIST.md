@@ -144,10 +144,11 @@ Kalau kamu mau auto deploy setiap push:
 
 1. buka Cloudflare dashboard
 2. masuk ke Workers & Pages
-3. pilih create / import existing project
-4. hubungkan repo GitHub
-5. pilih repo project ini
-6. set build/deploy command sesuai project
+3. kalau worker `abycourse` sudah lebih dulu dibuat, buka worker itu lalu pilih `Settings > Build > Connect repository`
+4. kalau belum ada worker, baru pilih create / import existing project
+5. hubungkan repo GitHub
+6. pilih repo project ini
+7. set build/deploy command sesuai project
 
 Yang aman untuk project ini:
 
@@ -158,6 +159,8 @@ Kalau Cloudflare minta build dan deploy dipisah, pakai:
 
 - Build command: `npx opennextjs-cloudflare build`
 - Deploy command: `npx opennextjs-cloudflare deploy`
+
+Sesudah repo sudah terhubung, push satu commit baru ke branch production supaya build pertama langsung jalan.
 
 ## 13. Catatan sesudah deploy pertama
 
