@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, like, sql } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import {
   adminUsers,
@@ -93,8 +93,26 @@ export function verifyAdminPassword(
   return bcrypt.compareSync(plainPassword, passwordHash);
 }
 
-export async function listExams(): Promise<ExamListItem[]> {
+export async function listExams(filters?: {
+  query?: string;
+  status?: ExamStatus | "all";
+  creationMode?: CreationMode | "all";
+}): Promise<ExamListItem[]> {
   const db = await getDb();
+  const whereClauses = [];
+
+  if (filters?.query) {
+    whereClauses.push(like(exams.title, `%${filters.query}%`));
+  }
+
+  if (filters?.status && filters.status !== "all") {
+    whereClauses.push(eq(exams.status, filters.status));
+  }
+
+  if (filters?.creationMode && filters.creationMode !== "all") {
+    whereClauses.push(eq(exams.creationMode, filters.creationMode));
+  }
+
   const rows = await executeMany(
     db
     .select({
@@ -118,6 +136,7 @@ export async function listExams(): Promise<ExamListItem[]> {
     .from(exams)
     .leftJoin(questions, eq(questions.examId, exams.id))
     .leftJoin(submissions, eq(submissions.examId, exams.id))
+    .where(whereClauses.length > 0 ? and(...whereClauses) : undefined)
     .groupBy(exams.id)
     .orderBy(desc(exams.createdAt)),
   );
@@ -127,6 +146,47 @@ export async function listExams(): Promise<ExamListItem[]> {
     questionCount: Number(row.questionCount ?? 0),
     submissionCount: Number(row.submissionCount ?? 0),
   }));
+}
+
+export async function duplicateExamByPublicId(examPublicId: string) {
+  const bundle = await getExamBundle(examPublicId);
+
+  if (!bundle) {
+    throw new Error("Exam not found.");
+  }
+
+  const duplicatedExam = await createExam({
+    teacherId: bundle.exam.teacherId,
+    title: `${bundle.exam.title} Copy`,
+    instructions: bundle.exam.instructions ?? "",
+    creationMode: bundle.exam.creationMode,
+    difficultyLevel: bundle.exam.difficultyLevel,
+    aiPrompt: bundle.exam.aiPrompt ?? undefined,
+  });
+
+  for (const question of bundle.questions) {
+    if (question.type === "multiple_choice") {
+      await addQuestion({
+        examPublicId: duplicatedExam.publicId,
+        type: "multiple_choice",
+        questionText: question.questionText,
+        teacherNotes: question.teacherNotes ?? undefined,
+        correctAnswerKey: question.correctAnswerKey ?? "A",
+        options: Object.fromEntries(
+          question.options.map((option) => [option.key, option.text]),
+        ) as Partial<Record<OptionKey, string>>,
+      });
+    } else {
+      await addQuestion({
+        examPublicId: duplicatedExam.publicId,
+        type: "essay",
+        questionText: question.questionText,
+        teacherNotes: question.teacherNotes ?? undefined,
+      });
+    }
+  }
+
+  return duplicatedExam;
 }
 
 export async function getExamByPublicId(examPublicId: string) {

@@ -9,6 +9,7 @@ import {
   createAttempt,
   createExam,
   createExamFromAiDraft,
+  duplicateExamByPublicId,
   duplicateQuestionByPublicId,
   getAdminByEmail,
   getAttemptBundle,
@@ -499,6 +500,39 @@ export async function closeExamAction(formData: FormData) {
   revalidatePath("/admin/exams");
   revalidatePath(`/admin/exams/${examPublicId}`);
   redirect(withMessage(`/admin/exams/${examPublicId}`, "success", "Exam sudah ditutup."));
+}
+
+export async function duplicateExamAction(formData: FormData) {
+  await requireAdmin();
+  const examPublicId = clampText(formData.get("examPublicId"));
+
+  if (!examPublicId) {
+    redirect(withMessage("/admin/exams", "error", "Exam yang mau diduplikasi belum terbaca."));
+  }
+
+  let duplicatedExamPublicId: string;
+
+  try {
+    const duplicatedExam = await duplicateExamByPublicId(examPublicId);
+    duplicatedExamPublicId = duplicatedExam.publicId;
+  } catch (error) {
+    redirect(
+      withMessage(
+        "/admin/exams",
+        "error",
+        error instanceof Error ? error.message : "Duplikasi exam belum berhasil.",
+      ),
+    );
+  }
+
+  revalidatePath("/admin/exams");
+  redirect(
+    withMessage(
+      `/admin/exams/${duplicatedExamPublicId}/edit`,
+      "success",
+      "Salinan exam baru sudah siap diedit.",
+    ),
+  );
 }
 
 export async function startExamAttemptAction(formData: FormData) {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { closeExamAction } from "@/app/actions";
+import { closeExamAction, duplicateExamAction } from "@/app/actions";
 import { CopyLinkButton } from "@/components/copy-link-button";
 import { Button, Card, PageIntro, StatusPill } from "@/components/ui";
 import { getExamBundle, listSubmissionsForExam } from "@/lib/db/queries";
@@ -36,6 +36,12 @@ export default async function ExamOverviewPage({
             <Button href={`/admin/exams/${bundle.exam.publicId}/edit`} variant="secondary">
               Edit Soal
             </Button>
+            <form action={duplicateExamAction}>
+              <input type="hidden" name="examPublicId" value={bundle.exam.publicId} />
+              <Button type="submit" variant="secondary">
+                Duplikasi
+              </Button>
+            </form>
             <Button href={`/admin/exams/${bundle.exam.publicId}/preview`} variant="secondary">
               Lihat Tampilan
             </Button>
@@ -104,6 +110,12 @@ export default async function ExamOverviewPage({
             <Button href={`/admin/exams/${bundle.exam.publicId}/submissions`} variant="secondary">
               Buka submission
             </Button>
+            <form action={duplicateExamAction}>
+              <input type="hidden" name="examPublicId" value={bundle.exam.publicId} />
+              <Button type="submit" variant="secondary" className="w-full">
+                Buat salinan exam
+              </Button>
+            </form>
             {bundle.exam.status !== "closed" ? (
               <form action={closeExamAction}>
                 <input type="hidden" name="examPublicId" value={bundle.exam.publicId} />
