@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
-import { RotateCcw, Sparkles, WandSparkles } from "lucide-react";
+import { RotateCcw, WandSparkles } from "lucide-react";
 import { generateAiExamClientAction } from "@/app/actions";
-import { aiPromptPresets, difficultyLevels, getDifficultyDescription } from "@/lib/utils";
+import { difficultyLevels, getDifficultyDescription } from "@/lib/utils";
 import { ActionStateOverlay } from "./action-state-overlay";
 import { Button, Field, Input, Notice, Select, Textarea } from "./ui";
 import { useToast } from "./toast-provider";
@@ -75,17 +75,6 @@ export function AiExamComposerForm({
     };
   }, [activeMode]);
 
-  function applyPreset(presetId: (typeof aiPromptPresets)[number]["id"]) {
-    const preset = aiPromptPresets.find((entry) => entry.id === presetId);
-
-    if (!preset) {
-      return;
-    }
-
-    setTopicPrompt(preset.topicPrompt);
-    setExtraInstructions(preset.extraInstructions);
-  }
-
   function runSubmit(mode: ApplyMode) {
     const form = formRef.current;
 
@@ -149,24 +138,6 @@ export function AiExamComposerForm({
         {examPublicId ? <input type="hidden" name="examPublicId" value={examPublicId} /> : null}
 
         <div className="space-y-5 md:col-span-2">
-          <div className="flex flex-wrap items-center gap-3">
-            {aiPromptPresets.map((preset) => (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => applyPreset(preset.id)}
-                className="inline-flex min-h-10 items-center gap-2 rounded-[14px] border border-[var(--color-border)] bg-white px-4 text-sm font-semibold text-[var(--color-text)] hover:border-[rgba(69,26,245,0.24)] hover:bg-[var(--color-surface)]"
-              >
-                <Sparkles className="h-4 w-4 text-[var(--color-primary)]" />
-                {preset.label}
-              </button>
-            ))}
-          </div>
-
-          <p className="text-sm leading-7 text-[var(--color-text-secondary)]">
-            Preset ini cuma titik awal. Setelah dipilih, kamu tetap bebas edit prompt dan instruksi tambahan sesuai kebutuhan muridmu.
-          </p>
-
           {showApiNotice ? (
             <Notice tone="info">
               Akses Gemini belum aktif. Lengkapi pengaturan AI aplikasi supaya mode ini bisa dipakai.
