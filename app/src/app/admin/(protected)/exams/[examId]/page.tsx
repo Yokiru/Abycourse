@@ -28,19 +28,19 @@ export default async function ExamOverviewPage({
   return (
     <>
       <PageIntro
-        eyebrow="Exam overview"
+        eyebrow="Ringkasan Exam"
         title={bundle.exam.title}
         description={bundle.exam.instructions || "Belum ada instruksi khusus untuk murid."}
         actions={
           <>
             <Button href={`/admin/exams/${bundle.exam.publicId}/edit`} variant="secondary">
-              Edit Draft
+              Edit Soal
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/preview`} variant="secondary">
-              Preview
+              Lihat Tampilan
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/submissions`}>
-              Lihat Submission
+              Lihat Jawaban
             </Button>
           </>
         }
@@ -56,26 +56,26 @@ export default async function ExamOverviewPage({
               </span>
             ) : null}
             <span className="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">
-              {bundle.exam.creationMode === "ai" ? "AI draft" : "Manual draft"}
+              {bundle.exam.creationMode === "ai" ? "AI" : "Manual"}
             </span>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-[24px] bg-[var(--color-surface)] p-5">
-              <p className="text-sm text-[var(--color-text-secondary)]">Questions</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">Jumlah soal</p>
               <p className="mt-3 text-3xl font-semibold">{bundle.questions.length}</p>
             </div>
             <div className="rounded-[24px] bg-[var(--color-surface)] p-5">
-              <p className="text-sm text-[var(--color-text-secondary)]">Submissions</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">Submission</p>
               <p className="mt-3 text-3xl font-semibold">{submissions.length}</p>
             </div>
             <div className="rounded-[24px] bg-[var(--color-surface)] p-5">
-              <p className="text-sm text-[var(--color-text-secondary)]">Updated</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">Update terakhir</p>
               <p className="mt-3 text-lg font-semibold">{formatDateTime(bundle.exam.updatedAt)}</p>
             </div>
           </div>
           <div className="rounded-[24px] border border-[var(--color-border)] bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-sm font-semibold text-[var(--color-text-secondary)]">Share link</p>
+              <p className="text-sm font-semibold text-[var(--color-text-secondary)]">Link murid</p>
               <CopyLinkButton value={shareUrl} />
             </div>
             <a
@@ -90,19 +90,19 @@ export default async function ExamOverviewPage({
         </Card>
 
         <Card className="space-y-5">
-          <h2 className="text-2xl font-semibold">Quick actions</h2>
+          <h2 className="text-2xl font-semibold">Aksi cepat</h2>
           <div className="flex flex-col gap-3">
             <Button href={`/admin/exams/${bundle.exam.publicId}/edit`} variant="secondary">
-              Edit questions
+              Edit soal
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/print`} variant="secondary">
-              Print PDF
+              Cetak PDF
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/print/answers`} variant="secondary">
               Kunci Jawaban PDF
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/submissions`} variant="secondary">
-              Open submissions
+              Buka submission
             </Button>
             {bundle.exam.status !== "closed" ? (
               <form action={closeExamAction}>
@@ -118,7 +118,7 @@ export default async function ExamOverviewPage({
             <p>
               Kalau kamu mau cek tampilan publiknya dulu, buka{" "}
               <Link href={`/admin/exams/${bundle.exam.publicId}/preview`} className="font-semibold text-[var(--color-primary)]">
-                preview exam
+                tampilan murid
               </Link>
               .
             </p>

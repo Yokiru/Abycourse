@@ -47,8 +47,8 @@ function PendingOverlayContent({
       steps && steps.length > 0
         ? steps
         : kind === "ai"
-          ? ["Reading your prompt", "Building balanced questions", "Preparing the draft editor"]
-          : ["Saving your answers", "Checking each response", "Preparing confirmation"],
+          ? ["Membaca materi", "Menyusun komposisi soal", "Menyiapkan editor draft"]
+          : ["Menyimpan jawaban", "Memeriksa respons", "Menyiapkan konfirmasi"],
     [kind, steps],
   );
   const [stepIndex, setStepIndex] = useState(0);
@@ -73,7 +73,7 @@ function PendingOverlayContent({
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)]">
               <LoaderCircle className="h-4 w-4 animate-spin" />
-              Processing
+              Memproses
             </div>
           </div>
 
@@ -103,7 +103,7 @@ function PendingOverlayContent({
                 {resolvedSteps[stepIndex]}
               </p>
               <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-                Step {stepIndex + 1}/{resolvedSteps.length}
+                Langkah {stepIndex + 1}/{resolvedSteps.length}
               </span>
             </div>
             <div className="mt-4 flex gap-2">

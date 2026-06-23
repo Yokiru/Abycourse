@@ -59,12 +59,12 @@ export function QuestionDraftCard({
               #{question.orderIndex}
             </span>
             <span className="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">
-              {question.type === "multiple_choice" ? "Multiple choice" : "Essay"}
+              {question.type === "multiple_choice" ? "Pilihan ganda" : "Essay"}
             </span>
             <span className="rounded-full bg-[var(--color-surface-muted)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)]">
               {question.type === "multiple_choice"
                 ? `${question.options.length} opsi`
-                : "Long answer"}
+                : "Jawaban panjang"}
             </span>
           </div>
           <div className="space-y-2">
@@ -77,7 +77,7 @@ export function QuestionDraftCard({
           </div>
         </div>
         <div className="mt-1 inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3 py-2 text-xs font-semibold text-[var(--color-primary)]">
-          <span>{open ? "Collapse" : "Expand"}</span>
+          <span>{open ? "Tutup" : "Buka"}</span>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-300 ${
               open ? "rotate-180" : "rotate-0"
@@ -103,7 +103,7 @@ export function QuestionDraftCard({
         >
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] bg-[var(--color-surface)] p-3">
             <div className="text-sm font-semibold text-[var(--color-text)]">
-              Quick actions
+              Aksi cepat
             </div>
             <QuestionQuickActions
               examPublicId={examPublicId}

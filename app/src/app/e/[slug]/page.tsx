@@ -69,8 +69,8 @@ export default async function PublicExamPage({
             </p>
             <form action={startExamAttemptAction} className="space-y-4">
               <input type="hidden" name="examSlug" value={slug} />
-              <Input name="studentName" placeholder="Your name" required />
-              <Button type="submit">Start Exam</Button>
+              <Input name="studentName" placeholder="Nama lengkap" required />
+              <Button type="submit">Mulai Exam</Button>
             </form>
           </Card>
         </div>

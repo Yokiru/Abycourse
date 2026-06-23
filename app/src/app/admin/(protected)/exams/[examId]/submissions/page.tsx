@@ -21,10 +21,10 @@ export default async function ExamSubmissionsPage({
   return (
     <>
       <PageIntro
-        eyebrow="Submissions"
+        eyebrow="Submission"
         title={`Jawaban untuk ${bundle.exam.title}`}
         description="Di sini kamu bisa lihat siapa saja yang sudah submit dan membuka detail jawaban per murid."
-        actions={<Button href={`/admin/exams/${bundle.exam.publicId}`} variant="secondary">Kembali ke overview</Button>}
+        actions={<Button href={`/admin/exams/${bundle.exam.publicId}`} variant="secondary">Kembali ke ringkasan</Button>}
       />
 
       {submissions.length === 0 ? (
@@ -44,11 +44,11 @@ export default async function ExamSubmissionsPage({
                 <div>
                   <p className="text-lg font-semibold">{submission.studentName}</p>
                   <p className="text-sm text-[var(--color-text-secondary)]">
-                    Submitted {formatDateTime(submission.submittedAt)}
+                    Dikirim {formatDateTime(submission.submittedAt)}
                   </p>
                 </div>
                 <div className="text-sm text-[var(--color-text-secondary)] md:pt-1">
-                  MCQ score:{" "}
+                  Skor pilihan ganda:{" "}
                   {submission.mcqTotal ? `${submission.mcqScore}/${submission.mcqTotal}` : "-"}
                 </div>
                 <div className="text-sm font-semibold text-[var(--color-primary)] md:pt-1">

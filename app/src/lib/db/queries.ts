@@ -361,7 +361,7 @@ export async function updateQuestion(input: {
   }));
 
   if (!question) {
-    throw new Error("Question not found.");
+    throw new Error("Soal tidak ditemukan.");
   }
 
   const timestamp = nowIso();
@@ -425,7 +425,7 @@ export async function duplicateQuestionByPublicId(input: {
   );
 
   if (!sourceQuestion) {
-    throw new Error("Question not found.");
+    throw new Error("Soal tidak ditemukan.");
   }
 
   await executeRun(db.update(questions)
@@ -494,7 +494,7 @@ export async function moveQuestionByPublicId(input: {
   );
 
   if (currentIndex === -1) {
-    throw new Error("Question not found.");
+    throw new Error("Soal tidak ditemukan.");
   }
 
   const swapIndex = input.direction === "up" ? currentIndex - 1 : currentIndex + 1;

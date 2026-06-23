@@ -21,18 +21,18 @@ export default async function PreviewExamPage({
   return (
     <>
       <PageIntro
-        eyebrow="Student preview"
+        eyebrow="Preview Murid"
         title={bundle.exam.title}
         description={bundle.exam.instructions || "Tidak ada instruksi tambahan."}
         actions={<Button href={`/admin/exams/${bundle.exam.publicId}/edit`} variant="secondary">Kembali ke editor</Button>}
       />
 
       <Card className="space-y-5">
-        <h2 className="text-2xl font-semibold">Start screen</h2>
+        <h2 className="text-2xl font-semibold">Layar awal murid</h2>
         <div className="rounded-[24px] bg-[var(--color-surface)] p-6">
-          <p className="text-sm text-[var(--color-text-secondary)]">Your Name</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Nama murid</p>
           <div className="mt-3 rounded-[16px] border border-[var(--color-border)] bg-white px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-            Student enters their name here
+            Murid menulis nama di sini sebelum mulai.
           </div>
         </div>
       </Card>
@@ -42,7 +42,7 @@ export default async function PreviewExamPage({
           <Card key={question.publicId} className="space-y-5">
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-primary)]">
-                Question {index + 1}
+                Soal {index + 1}
               </p>
               <h2 className="text-xl font-semibold">{question.questionText}</h2>
             </div>
@@ -59,7 +59,7 @@ export default async function PreviewExamPage({
               </div>
             ) : (
               <div className="rounded-[18px] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-4 text-sm text-[var(--color-text-secondary)]">
-                Essay answer field
+                Area jawaban essay
               </div>
             )}
           </Card>

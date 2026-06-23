@@ -61,9 +61,9 @@ export function StudentAttemptForm({
         successTitle="Jawabanmu sudah aman."
         successDescription="Kami sedang membuka halaman konfirmasi supaya kamu tahu submit-nya benar-benar masuk."
         steps={[
-          "Saving your selected answers",
-          "Checking each question payload",
-          "Preparing your submit confirmation",
+          "Menyimpan semua jawaban",
+          "Memeriksa setiap respons",
+          "Menyiapkan halaman konfirmasi",
         ]}
       />
 
@@ -74,7 +74,7 @@ export function StudentAttemptForm({
           <Card key={question.publicId} className="space-y-4">
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-primary)]">
-                Question {index + 1}
+                Soal {index + 1}
               </p>
               <h2 className="text-xl font-semibold">{question.questionText}</h2>
             </div>
@@ -100,7 +100,7 @@ export function StudentAttemptForm({
             ) : (
               <Textarea
                 name={`question_${question.publicId}`}
-                placeholder="Write your answer here"
+                placeholder="Tulis jawabanmu di sini"
                 required
               />
             )}
@@ -108,7 +108,7 @@ export function StudentAttemptForm({
         ))}
         <div className="pt-2">
           <Button type="submit" disabled={isPending} aria-disabled={isPending}>
-            Submit Answers
+            Kirim Jawaban
           </Button>
         </div>
       </form>

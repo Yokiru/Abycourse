@@ -129,7 +129,7 @@ function humanizeGeminiError(error: unknown) {
   const message = rawMessage.toLowerCase();
 
   if (message.includes("api key") || message.includes("api_key") || message.includes("credential")) {
-    return "Gemini API key belum valid atau belum terpasang dengan benar. Cek isi GEMINI_API_KEY di .env.local lalu restart app.";
+    return "Akses Gemini belum valid atau belum aktif dengan benar. Cek pengaturan AI aplikasi lalu coba lagi.";
   }
 
   if (
@@ -192,7 +192,7 @@ export async function generateExamDraftWithGemini(input: {
 }) {
   if (!env.geminiApiKey) {
     throw new Error(
-      "GEMINI API key belum diisi. Tambahkan GEMINI_API_KEY di .env.local lalu restart app.",
+      "Akses Gemini belum diaktifkan. Lengkapi pengaturan AI aplikasi terlebih dahulu.",
     );
   }
 

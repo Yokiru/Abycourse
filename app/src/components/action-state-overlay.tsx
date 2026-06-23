@@ -28,7 +28,7 @@ export function ActionStateOverlay({
   const Icon = phase === "success" ? CheckCircle2 : kind === "ai" ? Sparkles : SendHorizonal;
   const title = phase === "success" ? successTitle : loadingTitle;
   const description = phase === "success" ? successDescription : loadingDescription;
-  const badgeLabel = phase === "success" ? "Success" : "Processing";
+  const badgeLabel = phase === "success" ? "Berhasil" : "Memproses";
   const badgeClassName =
     phase === "success"
       ? "bg-[rgba(6,121,42,0.1)] text-[var(--color-secondary)]"

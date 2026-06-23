@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BookOpenText, FilePenLine, LogOut } from "lucide-react";
+import { BookOpenText, FilePenLine, LogOut, ShieldCheck } from "lucide-react";
 import { logoutAction } from "@/app/actions";
 import { Button } from "./ui";
 
@@ -15,27 +15,35 @@ export function AdminShell({
     <div className="admin-shell min-h-screen bg-[var(--color-bg)]">
       <header className="admin-shell-header border-b border-[var(--color-border)] bg-white/92 backdrop-blur">
         <div className="app-shell flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <Link href="/admin/exams" className="text-2xl font-semibold text-[var(--color-text)]">
-              Aby Course
-            </Link>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Ruang kerja ujian online untuk {userName}
-            </p>
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-surface)]">
+              <ShieldCheck className="h-5 w-5 text-[var(--color-primary)]" />
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/admin/exams"
+                className="text-2xl font-semibold text-[var(--color-text)]"
+              >
+                Aby Course
+              </Link>
+              <p className="text-sm text-[var(--color-text-secondary)]">
+                Workspace exam online untuk {userName}
+              </p>
+            </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button href="/admin/exams" variant="ghost" className="gap-2 px-4">
               <BookOpenText className="h-4 w-4" />
-              Exams
+              Semua Exam
             </Button>
             <Button href="/admin/exams/new" variant="secondary" className="gap-2 px-4">
               <FilePenLine className="h-4 w-4" />
-              New Exam
+              Exam Baru
             </Button>
             <form action={logoutAction}>
               <Button type="submit" variant="ghost" className="gap-2 px-4">
                 <LogOut className="h-4 w-4" />
-                Logout
+                Keluar
               </Button>
             </form>
           </div>

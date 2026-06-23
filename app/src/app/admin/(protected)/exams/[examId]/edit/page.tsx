@@ -33,16 +33,16 @@ export default async function EditExamPage({
   return (
     <>
       <PageIntro
-        eyebrow="Edit draft"
+        eyebrow="Editor Exam"
         title={`Rapikan ${bundle.exam.title}`}
         description="Di sini kamu bisa menyempurnakan metadata exam, menambah soal baru, dan revisi hasil draft sebelum dibagikan ke murid."
         actions={
           <>
             <Button href={`/admin/exams/${bundle.exam.publicId}`} variant="secondary">
-              Overview
+              Ringkasan
             </Button>
             <Button href={`/admin/exams/${bundle.exam.publicId}/preview`} variant="secondary">
-              Preview
+              Tampilan Murid
             </Button>
           </>
         }
@@ -67,9 +67,9 @@ export default async function EditExamPage({
 
       <Card className="space-y-5">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold">Gemini assist</h2>
+          <h2 className="text-2xl font-semibold">Bantuan AI</h2>
           <p className="text-sm leading-7 text-[var(--color-text-secondary)]">
-            Regenerate draft penuh kalau hasil sebelumnya kurang pas, atau tambahkan batch soal baru tanpa menghapus pertanyaan yang sudah kamu edit.
+            Buat ulang draft penuh kalau hasil sebelumnya kurang pas, atau tambahkan batch soal baru tanpa menghapus pertanyaan yang sudah kamu edit.
           </p>
         </div>
         <AiExamComposerForm
@@ -92,7 +92,7 @@ export default async function EditExamPage({
       <AddQuestionPanels examPublicId={bundle.exam.publicId} />
 
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Question bank draft</h2>
+        <h2 className="text-2xl font-semibold">Daftar soal</h2>
         {bundle.questions.length === 0 ? (
           <Card>
             <p className="text-sm leading-7 text-[var(--color-text-secondary)]">

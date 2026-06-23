@@ -368,7 +368,7 @@ export async function updateQuestionAction(formData: FormData) {
   if (!examPublicId || !questionPublicId || !questionText) {
     return {
       ok: false,
-      message: "Question update gagal dibaca.",
+      message: "Perubahan soal belum bisa diproses.",
     } satisfies InlineActionResult;
   }
 
@@ -401,7 +401,7 @@ export async function deleteQuestionAction(formData: FormData) {
   if (!examPublicId || !questionPublicId) {
     return {
       ok: false,
-      message: "Question delete gagal dibaca.",
+      message: "Penghapusan soal belum bisa diproses.",
     } satisfies InlineActionResult;
   }
 
@@ -422,7 +422,7 @@ export async function duplicateQuestionAction(formData: FormData) {
   if (!examPublicId || !questionPublicId) {
     return {
       ok: false,
-      message: "Question duplicate gagal dibaca.",
+      message: "Duplikasi soal belum bisa diproses.",
     } satisfies InlineActionResult;
   }
 

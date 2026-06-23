@@ -74,10 +74,10 @@ export function getStatusLabel(status: ExamStatus) {
   }
 
   if (status === "published") {
-    return "Published";
+    return "Dipublish";
   }
 
-  return "Closed";
+  return "Ditutup";
 }
 
 export function getDifficultyDescription(level: DifficultyLevel) {

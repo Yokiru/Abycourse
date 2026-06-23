@@ -139,9 +139,9 @@ export function AiExamComposerForm({
         successTitle={successCopy.title}
         successDescription={successCopy.description}
         steps={[
-          "Reading your prompt and teacher intent",
-          "Balancing difficulty with question count",
-          "Formatting the draft for editing",
+          "Membaca materi dan kebutuhan guru",
+          "Menyesuaikan tingkat kesulitan dan jumlah soal",
+          "Menyiapkan draft agar mudah diedit",
         ]}
       />
 
@@ -169,7 +169,7 @@ export function AiExamComposerForm({
 
           {showApiNotice ? (
             <Notice tone="info">
-              Isi <code>GEMINI_API_KEY</code> di <code>.env.local</code> supaya mode AI bisa jalan.
+              Akses Gemini belum aktif. Lengkapi pengaturan AI aplikasi supaya mode ini bisa dipakai.
             </Notice>
           ) : null}
         </div>
@@ -177,7 +177,7 @@ export function AiExamComposerForm({
         <Field label="Judul exam">
           <Input name="title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Reading Comprehension Test" required />
         </Field>
-        <Field label="Difficulty">
+        <Field label="Tingkat kesulitan">
           <Select
             name="difficultyLevel"
             value={difficultyLevel}
@@ -259,7 +259,7 @@ export function AiExamComposerForm({
                 aria-disabled={isPending}
               >
                 <RotateCcw className="h-4 w-4" />
-                Regenerate & Replace
+                Buat Ulang Draft
               </Button>
               <Button
                 type="button"
@@ -270,7 +270,7 @@ export function AiExamComposerForm({
                 aria-disabled={isPending}
               >
                 <WandSparkles className="h-4 w-4" />
-                Append Questions
+                Tambah Soal Baru
               </Button>
             </>
           ) : (

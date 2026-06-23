@@ -23,10 +23,10 @@ export default async function NewExamPage({
 
       <div className="flex flex-wrap gap-3">
         <Button href="/admin/exams/new?mode=manual" variant={mode === "manual" ? "primary" : "secondary"}>
-          Mode Manual
+          Tulis Manual
         </Button>
         <Button href="/admin/exams/new?mode=ai" variant={mode === "ai" ? "primary" : "secondary"}>
-          Mode AI
+          Gunakan AI
         </Button>
       </div>
 
@@ -42,7 +42,7 @@ export default async function NewExamPage({
             <Field label="Judul exam">
               <Input name="title" placeholder="Simple Past Tense Quiz" required />
             </Field>
-            <Field label="Difficulty">
+            <Field label="Tingkat kesulitan">
               <Select name="difficultyLevel" defaultValue="A2">
                 {difficultyLevels.map((level) => (
                   <option key={level} value={level}>
@@ -61,7 +61,7 @@ export default async function NewExamPage({
             </div>
             <div className="md:col-span-2">
               <PendingSubmitButton
-                idleLabel="Buat Draft Manual"
+                idleLabel="Simpan Draft"
                 pendingLabel="Menyimpan draft..."
               />
             </div>
@@ -73,10 +73,10 @@ export default async function NewExamPage({
             <div className="space-y-5 md:col-span-2">
               <h2 className="text-2xl font-semibold">Draft dari Gemini</h2>
               <p className="text-sm leading-7 text-[var(--color-text-secondary)]">
-                Gemini dipakai untuk membuat draft soal terstruktur. Hasilnya tetap masuk ke editor agar kamu bisa review dulu.
+                Gemini membantu menyusun draft soal yang rapi. Hasilnya tetap masuk ke editor agar kamu bisa cek dan revisi dulu.
               </p>
               <Notice tone="info">
-                Generate AI memang bisa butuh beberapa detik. Setelah submit, tombol akan berubah jadi loading sampai draft siap.
+                Pembuatan draft AI bisa butuh beberapa detik. Setelah dikirim, proses akan berjalan sampai draft siap dibuka.
               </Notice>
             </div>
             <AiExamComposerForm

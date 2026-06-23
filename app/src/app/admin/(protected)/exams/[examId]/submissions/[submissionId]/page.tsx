@@ -19,10 +19,10 @@ export default async function SubmissionDetailPage({
   return (
     <>
       <PageIntro
-        eyebrow="Submission detail"
+        eyebrow="Detail submission"
         title={submission.studentName}
-        description={`Submitted ${formatDateTime(submission.submittedAt)}`}
-        actions={<Button href={`/admin/exams/${bundle.exam.publicId}/submissions`} variant="secondary">Kembali ke list</Button>}
+        description={`Dikirim ${formatDateTime(submission.submittedAt)}`}
+        actions={<Button href={`/admin/exams/${bundle.exam.publicId}/submissions`} variant="secondary">Kembali ke daftar</Button>}
       />
 
       <Card className="space-y-3">
@@ -38,7 +38,7 @@ export default async function SubmissionDetailPage({
           <Card key={answer.questionPublicId} className="space-y-4">
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-primary)]">
-                Question {index + 1}
+                Soal {index + 1}
               </p>
               <h2 className="text-xl font-semibold">{answer.questionText}</h2>
             </div>
@@ -66,7 +66,7 @@ export default async function SubmissionDetailPage({
               </div>
             ) : (
               <div className="rounded-[18px] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-4 text-sm leading-7">
-                {answer.answerText || "No answer."}
+                {answer.answerText || "Belum ada jawaban."}
               </div>
             )}
           </Card>
